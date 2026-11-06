@@ -3,9 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Click PDF</title>
-<meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Herramientas gratis y privadas para PDF, Word, Excel e imágenes: unir, dividir, comprimir, convertir, OCR, firmar, proteger y más. Todo se procesa en tu dispositivo.">
+<title>Click PDF: herramientas gratis para PDF, Word, Excel e imágenes</title>
+<meta name="description" content="De PDF a Word, unir, comprimir y convertir PDF gratis y sin registro, más OCR, firma, detector de IA y editor de texto en imágenes. Tus archivos no salen de tu dispositivo.">
+<meta name="theme-color" content="#2240f2">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232240f2'/%3E%3Cpath d='M9 6l7 20 3.3-8.7L28 14z' fill='none' stroke='%23fff' stroke-width='2.6' stroke-linejoin='round'/%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Click PDF">
+<meta property="og:title" content="Click PDF: herramientas gratis para PDF, Word, Excel e imágenes">
+<meta property="og:description" content="De PDF a Word, unir, comprimir y convertir PDF gratis y sin registro, más OCR, firma, detector de IA y editor de texto en imágenes. Tus archivos no salen de tu dispositivo.">
+<meta property="og:locale" content="es_CO">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;700&family=Caveat:wght@600&display=swap">
@@ -161,7 +167,13 @@ body{background:radial-gradient(900px 620px at 8% -8%,color-mix(in srgb,var(--ac
 .th .tb button{flex:1;height:30px;border:1px solid var(--line);background:var(--card);border-radius:6px;cursor:pointer;padding:0}
 .th small{font:500 12px var(--f-mono);color:var(--mute);text-align:center}
 .pad{width:100%;max-width:560px;aspect-ratio:3/1;background:#fff;border:1px solid var(--line);border-radius:10px;touch-action:none;cursor:crosshair}
-.foot{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap;color:var(--mute);font-size:14px}
+.foot{margin-top:56px;padding-top:26px;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;color:var(--mute);font-size:14px}
+.fcol{display:grid;gap:7px;align-content:start;min-width:0}
+.fcol b{color:var(--ink);font:700 15px var(--f-disp)}
+.fcol p{margin:0;max-width:44ch}
+.fcol a{color:var(--mute);text-decoration:none}
+.fcol a:hover{color:var(--accent);text-decoration:underline}
+.fcopy{grid-column:1/-1;padding-top:14px;border-top:1px solid var(--line);font-size:13px}
 .det{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
 .det-t{flex:1 1 240px;display:grid;gap:6px;min-width:0}
 .det-t h4{margin:0;font:700 21px/1.2 var(--f-disp)}
@@ -191,6 +203,8 @@ body{background:radial-gradient(900px 620px at 8% -8%,color-mix(in srgb,var(--ac
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 
+<link rel="canonical" href="https://click-documentos.netlify.app/">
+<meta property="og:url" content="https://click-documentos.netlify.app/">
 </head>
 <body>
 <div class="wrap">
@@ -203,8 +217,10 @@ body{background:radial-gradient(900px 620px at 8% -8%,color-mix(in srgb,var(--ac
   </header>
   <main id="app"></main>
   <footer class="foot">
-    <span>Click PDF · Herramientas PDF gratis</span>
-    <span id="toolcount"></span>
+    <div class="fcol fbrand"><b>Click PDF</b><p>Herramientas gratis para PDF, Word, Excel e imágenes. Sin registro y sin subir tus archivos a ningún servidor.</p><span id="toolcount"></span></div>
+    <nav class="fcol" aria-label="Herramientas populares"><b>Más buscadas</b><a href="/de-pdf-a-word">De PDF a Word</a><a href="/unir-pdf">Unir PDF</a><a href="/comprimir-pdf">Comprimir PDF</a><a href="/de-jpg-a-pdf">De JPG a PDF</a><a href="/de-word-a-pdf">De Word a PDF</a><a href="/detector-de-ia">Detector de IA</a><a href="/editar-texto-imagen">Editar texto de una imagen</a></nav>
+    <div class="fcol"><b>Privacidad</b><p>Los archivos se procesan dentro de tu navegador y no se guardan en ningún lado. Solo la traducción, cuando tu navegador no trae traductor, envía el texto a un servicio externo y te lo avisa antes.</p></div>
+    <div class="fcopy">© 2026 Click PDF · Hecho en Colombia</div>
   </footer>
 </div>
 
@@ -337,9 +353,9 @@ const T=[
  run:async c=>{await need("zip");let z;try{z=await JSZip.loadAsync(await c.files[0].arrayBuffer())}catch(e){throw new Error("No pude abrir ese ZIP. Puede estar dañado o protegido con contraseña.")}const ent=Object.values(z.files).filter(e=>!e.dir);if(!ent.length)throw new Error("Ese ZIP está vacío.");for(const[k,e]of ent.entries()){c.prog("Sacando "+e.name,k/ent.length);const b=await e.async("blob");c.out(new Blob([b],{type:MIME[extOf(e.name)]||"application/octet-stream"}),e.name.split("/").pop())}c.note(ent.length+" archivo(s) encontrados.")}},
 {id:"reparar",cat:"opt",b:"REPARAR",n:"Reparar PDF",d:"Recupera PDF dañados que no abren bien.",acc:"pdf",multi:1,
  run:async c=>{for(const f of c.files){let b,how;try{const d=await PDFLib.PDFDocument.load(await f.arrayBuffer(),{ignoreEncryption:true,throwOnInvalidObject:false});b=await d.save();how="estructura reconstruida"}catch(e){b=await rasterPdf(f,{scale:2,q:.9},c);how="páginas recuperadas como imagen"}c.out(b,base(f.name)+"-reparado.pdf");c.note(f.name+": "+how+".")}}},
-{id:"ocr",cat:"opt",b:"OCR",n:"OCR: imagen a Word editable",d:"Convierte fotos o PDF escaneados en un PDF Pro idéntico al original con texto que se puede buscar y copiar, y en un Word editable.",acc:"pdfimg",
+{id:"ocr",cat:"from",b:"PDF→WORD",n:"De PDF a Word",d:"Convierte PDF, PDF escaneados o fotos en un Word editable. Si es escaneado, también te da un PDF PRO idéntico al original.",acc:"pdfimg",
  opts:'<label class="fld">Idioma del documento<select id="o-lang"><option value="spa">Español</option><option value="eng">Inglés</option><option value="spa+eng">Español e inglés</option><option value="por">Portugués</option></select></label><p class="hint">Lee hasta 30 páginas por vez. Te entrega un PDF Pro igualito al original pero con texto seleccionable, un Word editable y el texto plano.</p>',
- run:async c=>{const f=c.files[0],cvs=[];if(isImg(f))cvs.push(await imgCanvas(f,"",2600));else{const d=await jsDoc(f),n=Math.min(d.numPages,30);for(let i=1;i<=n;i++){c.prog("Preparando página "+(i+1-1)+" de "+n,(i-1)/n);cvs.push((await renderPage(d,i,2)).c)}}
+ run:async c=>{const f=c.files[0],cvs=[];if(isPdf(f)){const pages=await pdfLines(f,c),chars=pages.flat().reduce((a,l)=>a+l.text.length,0);if(chars>200){const paras=toParas(pages),nm=base(f.name),html=paras.map(q=>(q.pb?'<br clear="all" style="page-break-before:always">':"")+(q.h===1?"<h1>"+xmlEsc(q.text)+"</h1>":q.h===2?"<h2>"+xmlEsc(q.text)+"</h2>":q.bullet?"<ul><li>"+xmlEsc(q.text.replace(/^[•·▪●◦■–-]\s+/,""))+"</li></ul>":"<p>"+xmlEsc(q.text)+"</p>")).join("");c.out(await makeDocx(paras),nm+".docx");c.out(new Blob([htmlText(html)],{type:MIME.txt}),nm+".txt");c.node(el("div",{class:"panel"},el("p",{class:"hint",text:"Así quedó tu documento (vista previa):"}),el("div",{class:"docprev",html})));c.note("Tu PDF ya tenía texto, así que lo convertí directo a Word: más rápido y exacto.");return}c.prog("Tu PDF es escaneado: lo voy a leer con OCR…",.05)}if(isImg(f))cvs.push(await imgCanvas(f,"",2600));else{const d=await jsDoc(f),n=Math.min(d.numPages,30);for(let i=1;i<=n;i++){c.prog("Preparando página "+(i+1-1)+" de "+n,(i-1)/n);cvs.push((await renderPage(d,i,2)).c)}}
   let html="",proPdf=null;const PB='<br clear="all" style="page-break-before:always">';
   if(IN_CLAUDE){const sm=await sampler();for(const[k,cv]of cvs.entries()){c.prog("Reconstruyendo página "+(k+1)+" de "+cvs.length,k/cvs.length);const r=await sm(OCR_HTML_PROMPT,{images:[await blobOf(cv,"image/jpeg",.9)],cache:false});html+=(k?PB:"")+safeHtml(r.text)}}
   else{await need("tess");c.prog("Preparando el lector de texto…",0);const w=await Tesseract.createWorker(c.v("lang")),pro=await PDFLib.PDFDocument.create(),font=await pro.embedFont(PDFLib.StandardFonts.Helvetica),sc=isImg(f)?.75:.5;try{for(const[k,cv]of cvs.entries()){c.prog("Leyendo página "+(k+1)+" de "+cvs.length,k/cvs.length);const oc=ocrCanvas(cv),r=await w.recognize(oc,{},{text:true,blocks:true});html+=(k?PB:"")+tessHtml(r.data,oc.width);c.prog("Armando el PDF Pro, página "+(k+1),(k+.8)/cvs.length);await addProPage(pro,font,cv,r.data,oc.width/cv.width,sc)}}finally{await w.terminate()}proPdf=await pro.save()}
@@ -347,33 +363,33 @@ const T=[
   c.node(el("div",{class:"panel"},el("p",{class:"hint",text:"Así quedó tu documento editable (vista previa):"}),el("div",{class:"docprev",html})));
   if(proPdf)c.out(proPdf,nm+"-PRO.pdf");c.out(new Blob([wordDoc(html)],{type:"application/msword"}),nm+"-editable.doc");c.out(new Blob([text],{type:MIME.txt}),nm+"-texto.txt");
   c.note(proPdf?"PDF Pro: se ve idéntico al original (colores, logos, tablas) y además puedes buscar, seleccionar y copiar el texto. Es la mejor opción para conservar el detalle.":"El Word conserva la estructura del documento.");c.note("Word editable: para modificar el contenido. En capturas muy cargadas puede quedar desordenado; revisa nombres y cifras.")}},
-{id:"jpg-pdf",cat:"to",b:"JPG→PDF",n:"Imágenes a PDF",d:"Convierte JPG, PNG o WEBP en un PDF. Ajusta hoja y márgenes.",acc:"img",multi:1,
+{id:"jpg-pdf",cat:"to",b:"JPG→PDF",n:"De imágenes a PDF",d:"Convierte JPG, PNG o WEBP en un PDF. Ajusta hoja y márgenes.",acc:"img",multi:1,
  opts:'<div class="row"><label class="fld">Tamaño de hoja<select id="o-size"><option value="ajustar">Igual a la imagen</option><option value="a4">A4</option><option value="carta">Carta</option></select></label><label class="fld">Margen<select id="o-margin"><option value="0">Sin margen</option><option value="20">Pequeño</option><option value="42">Grande</option></select></label></div>',
  run:async c=>c.out(await imagesToPdf(c.files,{size:c.v("size"),margin:c.v("margin")},c),"imagenes.pdf")},
-{id:"word-pdf",cat:"to",b:"WORD→PDF",n:"Word a PDF",d:"Convierte documentos DOCX a PDF con su formato.",acc:"docx",multi:1,
+{id:"word-pdf",cat:"to",b:"WORD→PDF",n:"De Word a PDF",d:"Convierte documentos DOCX a PDF con su formato.",acc:"docx",multi:1,
  opts:'<label class="fld">Tamaño de hoja<select id="o-size"><option value="carta">Carta</option><option value="a4">A4</option></select></label>',
  run:async c=>{await need("mammoth");for(const f of c.files){c.prog("Convirtiendo "+f.name,.2);const r=await mammoth.convertToHtml({arrayBuffer:await f.arrayBuffer()});c.out(await htmlToPdf(r.value,{size:c.v("size")}),base(f.name)+".pdf")}}},
-{id:"excel-pdf",cat:"to",b:"EXCEL→PDF",n:"Excel a PDF",d:"Pasa tus hojas de cálculo a PDF, en vertical u horizontal.",acc:"xlsx",
+{id:"excel-pdf",cat:"to",b:"EXCEL→PDF",n:"De Excel a PDF",d:"Pasa tus hojas de cálculo a PDF, en vertical u horizontal.",acc:"xlsx",
  opts:'<div class="row"><label class="fld">Orientación<select id="o-or"><option value="h">Horizontal</option><option value="v">Vertical</option></select></label><label class="fld">Tamaño de hoja<select id="o-size"><option value="carta">Carta</option><option value="a4">A4</option></select></label></div>',
  run:async c=>{await need("xlsx");const f=c.files[0],wb=XLSX.read(await f.arrayBuffer(),{type:"array"});let html="";wb.SheetNames.forEach((s,k)=>{const t=XLSX.utils.sheet_to_html(wb.Sheets[s]),m=t.match(/<table[\s\S]*<\/table>/i);html+=(k?'<div class="html2pdf__page-break"></div>':"")+(wb.SheetNames.length>1?"<h2>"+xmlEsc(s)+"</h2>":"")+(m?m[0]:"")});c.prog("Creando PDF",.4);c.out(await htmlToPdf(html,{landscape:c.v("or")==="h",size:c.v("size")}),base(f.name)+".pdf")}},
-{id:"html-pdf",cat:"to",b:"HTML→PDF",n:"HTML a PDF",d:"Pega el código de una página o sube un archivo HTML y conviértelo.",acc:"html",optional:1,
+{id:"html-pdf",cat:"to",b:"HTML→PDF",n:"De HTML a PDF",d:"Pega el código de una página o sube un archivo HTML y conviértelo.",acc:"html",optional:1,
  opts:'<label class="fld">Código HTML<textarea id="o-html" rows="7" placeholder="<h1>Hola</h1><p>Pega aquí tu HTML…</p>"></textarea></label><p class="hint">O sube un archivo .html arriba. Las páginas de internet por dirección no se pueden leer desde el navegador; guarda la página como .html y súbela.</p>',
  run:async c=>{let h=c.v("html").trim();if(c.files[0])h=await c.files[0].text();if(!h)throw new Error("Pega un código HTML o sube un archivo .html.");const m=h.match(/<body[^>]*>([\s\S]*)<\/body>/i);h=(m?m[1]:h).replace(/<script[\s\S]*?<\/script>/gi,"");c.out(await htmlToPdf(h,{}),c.files[0]?base(c.files[0].name)+".pdf":"pagina.pdf")}},
-{id:"ppt-pdf",cat:"to",b:"PPT→PDF",n:"PowerPoint a PDF",d:"Convierte presentaciones PPTX a PDF.",soon:1},
-{id:"pdf-jpg",cat:"from",b:"PDF→JPG",n:"PDF a JPG",d:"Convierte cada página en una imagen de buena calidad.",acc:"pdf",
+{id:"ppt-pdf",cat:"to",b:"PPT→PDF",n:"De PowerPoint a PDF",d:"Convierte presentaciones PPTX a PDF.",soon:1},
+{id:"pdf-jpg",cat:"from",b:"PDF→JPG",n:"De PDF a JPG",d:"Convierte cada página en una imagen de buena calidad.",acc:"pdf",
  opts:'<div class="row"><label class="fld">Calidad<select id="o-q"><option value="1.5">Normal</option><option value="2.5" selected>Alta</option><option value="4">Máxima</option></select></label><label class="fld">Formato<select id="o-fmt"><option value="jpg">JPG</option><option value="png">PNG</option></select></label></div><label class="fld">Solo estas páginas (opcional)<input id="o-r" type="text" placeholder="Todas"></label>',
  run:async c=>{const d=await jsDoc(c.files[0]),nm=base(c.files[0].name),png=c.v("fmt")==="png",idx=c.v("r").trim()?parseRanges(c.v("r"),d.numPages):[...Array(d.numPages).keys()];for(const[k,i]of idx.entries()){c.prog("Página "+(i+1),k/idx.length);const r=await renderPage(d,i+1,+c.v("q"));c.out(await blobOf(r.c,png?"image/png":"image/jpeg",.92),nm+"-"+(i+1)+(png?".png":".jpg"));r.c.width=0}}},
-{id:"pdf-word",cat:"from",b:"PDF→WORD",n:"PDF a Word",d:"Convierte tu PDF en un DOCX editable con títulos y párrafos.",acc:"pdf",
+{id:"pdf-word",cat:"from",hidden:1,b:"PDF→WORD",n:"PDF a Word",d:"Convierte tu PDF en un DOCX editable con títulos y párrafos.",acc:"pdf",
  run:async c=>{const pages=await pdfLines(c.files[0],c),paras=toParas(pages);if(paras.length<2)throw new Error("Este PDF no tiene texto (parece escaneado). Pásalo primero por OCR.");c.out(await makeDocx(paras),base(c.files[0].name)+".docx");c.note(pages.length+" páginas convertidas a texto editable.")}},
-{id:"pdf-ppt",cat:"from",b:"PDF→PPT",n:"PDF a PowerPoint",d:"Cada página se vuelve una diapositiva PPTX.",acc:"pdf",
+{id:"pdf-ppt",cat:"from",b:"PDF→PPT",n:"De PDF a PowerPoint",d:"Cada página se vuelve una diapositiva PPTX.",acc:"pdf",
  run:async c=>{await need("pptx");const d=await jsDoc(c.files[0]),p=new PptxGenJS();let H=5.625;for(let i=1;i<=d.numPages;i++){c.prog("Diapositiva "+i+" de "+d.numPages,(i-1)/d.numPages);const r=await renderPage(d,i,2);if(i===1){H=+(10*r.h/r.w).toFixed(3);p.defineLayout({name:"PDF",width:10,height:H});p.layout="PDF"}p.addSlide().addImage({data:r.c.toDataURL("image/jpeg",.9).replace(/^data:/,""),x:0,y:0,w:10,h:H});r.c.width=0}c.prog("Armando la presentación",.95);c.out(await p.write({outputType:"blob"}),base(c.files[0].name)+".pptx")}},
-{id:"pdf-excel",cat:"from",b:"PDF→EXCEL",n:"PDF a Excel",d:"Saca las tablas y datos de tu PDF a una hoja de Excel.",acc:"pdf",
+{id:"pdf-excel",cat:"from",b:"PDF→EXCEL",n:"De PDF a Excel",d:"Saca las tablas y datos de tu PDF a una hoja de Excel.",acc:"pdf",
  run:async c=>{await need("xlsx");const pages=await pdfLines(c.files[0],c),wb=XLSX.utils.book_new();let rows=0;pages.forEach((lines,pi)=>{const aoa=lines.map(L=>{const cells=[];let cur=null,end=null;for(const t of L.items){if(cur!==null&&t.x-end<t.h*1.2){cur+=(t.x-end>t.h*.2?" ":"")+t.s}else{if(cur!==null)cells.push(cur.trim());cur=t.s}end=t.x+t.w}if(cur!==null)cells.push(cur.trim());return cells.map(v=>{const s=v.replace(/\s/g,"");if(/^-?\$?\d{1,3}(\.\d{3})+(,\d+)?$/.test(s))return+s.replace(/[$.]/g,"").replace(",",".");if(/^-?\d+([.,]\d+)?$/.test(s))return+s.replace(",",".");return v})});rows+=aoa.length;if(aoa.length)XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(aoa),"Página "+(pi+1))});if(!rows)throw new Error("Este PDF no tiene texto (parece escaneado). Pásalo primero por OCR.");c.out(new Blob([XLSX.write(wb,{type:"array",bookType:"xlsx"})],{type:MIME.xlsx}),base(c.files[0].name)+".xlsx");c.note(rows+" filas extraídas, una hoja por página.")}},
-{id:"pdf-md",cat:"from",b:"PDF→MD",n:"PDF a Markdown",d:"Texto limpio con títulos y listas, ideal para notas o IA.",acc:"pdf",
+{id:"pdf-md",cat:"from",b:"PDF→MD",n:"De PDF a Markdown",d:"Texto limpio con títulos y listas, ideal para notas o IA.",acc:"pdf",
  run:async c=>{const paras=toParas(await pdfLines(c.files[0],c));if(paras.length<2)throw new Error("Este PDF no tiene texto (parece escaneado). Pásalo primero por OCR.");const md=paras.map(p=>(p.h===1?"# ":p.h===2?"## ":p.bullet?"- ":"")+p.text.replace(/^[•·▪●◦■–-]\s+/,"")).join("\n\n");c.text(md);c.out(new Blob([md],{type:MIME.md}),base(c.files[0].name)+".md")}},
-{id:"pdf-txt",cat:"from",b:"PDF→TXT",n:"PDF a texto",d:"Todo el texto del PDF en un archivo .txt.",acc:"pdf",extra:1,
+{id:"pdf-txt",cat:"from",b:"PDF→TXT",n:"De PDF a texto",d:"Todo el texto del PDF en un archivo .txt.",acc:"pdf",extra:1,
  run:async c=>{const pages=await pdfLines(c.files[0],c),t=pages.map((l,i)=>(pages.length>1?"--- Página "+(i+1)+" ---\n":"")+l.map(x=>x.text).join("\n")).join("\n\n").trim();if(!t)throw new Error("Este PDF no tiene texto (parece escaneado). Pásalo primero por OCR.");c.text(t);c.out(new Blob([t],{type:MIME.txt}),base(c.files[0].name)+".txt")}},
-{id:"pdfa",cat:"from",b:"PDF/A",n:"PDF a PDF/A",d:"Formato estándar para archivar documentos.",soon:1},
+{id:"pdfa",cat:"from",b:"PDF/A",n:"De PDF a PDF/A",d:"Formato estándar para archivar documentos.",soon:1},
 {id:"rotar",cat:"edit",b:"ROTAR",n:"Rotar PDF",d:"Gira todas las páginas o solo las que elijas, en varios PDF a la vez.",acc:"pdf",multi:1,
  opts:'<div class="row"><label class="fld">Giro<select id="o-deg"><option value="90">90° a la derecha</option><option value="180">180°</option><option value="270">90° a la izquierda</option></select></label><label class="fld">Páginas (opcional)<input id="o-r" type="text" placeholder="Todas"></label></div>',
  run:async c=>{for(const f of c.files){const d=await libDoc(f),ps=d.getPages(),idx=c.v("r").trim()?parseRanges(c.v("r"),ps.length):ps.map((_,i)=>i);idx.forEach(i=>ps[i].setRotation(PDFLib.degrees((ps[i].getRotation().angle+ +c.v("deg"))%360)));c.out(await d.save(),base(f.name)+"-rotado.pdf")}}},
@@ -452,13 +468,13 @@ const icon=cat=>el("span",{class:"ico cat-"+cat,html:'<svg viewBox="0 0 24 24" f
 function drawThumbs(box){box.textContent="";ST.order.forEach((o,k)=>{const cv=o.c;cv.style.transform="rotate("+o.rot+"deg)";const mv=(d)=>{const j=k+d;if(j<0||j>=ST.order.length)return;[ST.order[k],ST.order[j]]=[ST.order[j],ST.order[k]];drawThumbs(box)};box.append(el("div",{class:"th"},cv,el("small",{text:"Pág. "+(o.i+1)}),el("div",{class:"tb"},el("button",{type:"button","aria-label":"Mover antes",text:"←",onclick:()=>mv(-1)}),el("button",{type:"button","aria-label":"Girar",text:"⟳",onclick:()=>{o.rot=(o.rot+90)%360;cv.style.transform="rotate("+o.rot+"deg)"}}),el("button",{type:"button","aria-label":"Mover después",text:"→",onclick:()=>mv(1)}),el("button",{type:"button","aria-label":"Quitar página",text:"✕",onclick:()=>{ST.order.splice(k,1);drawThumbs(box)}}))))})}
 function home(){const app=$("#app");app.textContent="";document.title="Click PDF";
   const search=el("input",{type:"search",id:"q",placeholder:"Busca una herramienta: unir, comprimir, Word…","aria-label":"Buscar herramienta",value:query});
-  const live=T.filter(t=>!t.soon&&!(t.ai&&!IN_CLAUDE)).length;
+  const live=T.filter(t=>!t.hidden&&!t.soon&&!(t.ai&&!IN_CLAUDE)).length;
   const sheet=(cls,tag)=>el("div",{class:"sheet "+cls},el("span",{class:"tagf",text:tag}),el("i",{class:"t"}),el("i"),el("i",{class:"m"}),el("i"),el("i",{class:"s"}),el("i"),el("i",{class:"m"}));
   app.append(el("section",{class:"hero"},el("div",{class:"hero-txt"},el("span",{class:"eyebrow",text:"Gratis · Sin registro · Privado"}),el("h1",{html:"Todo lo que tus documentos necesitan, <em>en un clic.</em>"}),el("p",{text:"PDF, Word, Excel, PowerPoint e imágenes: une, divide, comprime, convierte, firma y protege. Todo se procesa dentro de tu navegador, así que nadie más ve tus archivos."}),el("div",{class:"search"},el("span",{html:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>'}),search),el("div",{class:"stats"},el("div",{},el("b",{text:String(live)}),el("span",{text:"herramientas"})),el("div",{},el("b",{text:"0"}),el("span",{text:"archivos subidos"})),el("div",{},el("b",{text:"$0"}),el("span",{text:"para siempre"})))),el("div",{class:"stack","aria-hidden":"true"},sheet("s1","WORD→PDF"),sheet("s2","OCR"),sheet("s3","UNIR"),el("span",{class:"cursor",html:'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3l5 15 2.5-6.5L19 9z"/><path d="M13 13l6 6"/></svg>'}))));
   const chips=el("div",{class:"chips",role:"group","aria-label":"Categorías"});Object.entries(CATS).forEach(([k,v])=>chips.append(el("button",{class:"chip","aria-pressed":String(filter===k),text:v,onclick:()=>{filter=k;home()}})));
   const list=el("div",{id:"grid"});app.append(chips,list);
   const card=t=>{const soon=t.soon||(t.ai&&!IN_CLAUDE);return el(soon?"div":"button",{class:"tool cat-"+t.cat,"aria-disabled":soon?"true":null,onclick:soon?null:()=>{location.hash=t.id}},el("div",{class:"tt"},icon(t.cat),el("span",{class:"badge cat-"+t.cat},t.b)),el("h3",{},t.n,t.soon?el("span",{class:"tag",text:"Pronto"}):t.cat==="ai"?el("span",{class:"tag",text:"IA"}):t.extra?el("span",{class:"tag",text:"Extra"}):null),el("p",{text:t.d}))};
-  const fill=()=>{list.textContent="";const q=query.trim().toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");const hits=T.filter(t=>(filter==="all"||t.cat===filter)&&(!q||(t.n+" "+t.d+" "+t.b+" "+CATS[t.cat]).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").includes(q)));if(!hits.length){list.append(el("p",{class:"empty",text:"No encontré herramientas con esa palabra."}));return}if(filter==="all"&&!q){Object.keys(CATS).filter(k=>k!=="all").forEach(k=>{const g=hits.filter(t=>t.cat===k);if(!g.length)return;list.append(el("section",{class:"sect cat-"+k},el("h2",{},el("span",{class:"dot"}),CATS[k],el("small",{text:String(g.length)})),el("div",{class:"grid"},g.map(card))))})}else list.append(el("div",{class:"grid"},hits.map(card)))};
+  const fill=()=>{list.textContent="";const q=query.trim().toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");const hits=T.filter(t=>!t.hidden&&(filter==="all"||t.cat===filter)&&(!q||(t.n+" "+t.d+" "+t.b+" "+CATS[t.cat]).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").includes(q)));if(!hits.length){list.append(el("p",{class:"empty",text:"No encontré herramientas con esa palabra."}));return}if(filter==="all"&&!q){Object.keys(CATS).filter(k=>k!=="all").forEach(k=>{const g=hits.filter(t=>t.cat===k);if(!g.length)return;list.append(el("section",{class:"sect cat-"+k},el("h2",{},el("span",{class:"dot"}),CATS[k],el("small",{text:String(g.length)})),el("div",{class:"grid"},g.map(card))))})}else list.append(el("div",{class:"grid"},hits.map(card)))};
   search.addEventListener("input",e=>{query=e.target.value;fill()});fill();
   app.append(el("section",{class:"sect"},el("h2",{text:"Así de fácil"}),el("div",{class:"how"},el("div",{},el("b",{text:"PASO 1"}),el("h4",{text:"Elige la herramienta"}),el("p",{text:"Busca lo que necesitas o explora por categoría."})),el("div",{},el("b",{text:"PASO 2"}),el("h4",{text:"Suelta tu archivo"}),el("p",{text:"Arrástralo o elígelo. Se queda en tu dispositivo."})),el("div",{},el("b",{text:"PASO 3"}),el("h4",{text:"Descarga el resultado"}),el("p",{text:"En segundos, listo para enviar o imprimir."})))));
   $("#toolcount").textContent=live+" herramientas listas";
@@ -469,7 +485,7 @@ function openTool(t){Object.keys(ST).forEach(k=>delete ST[k]);const app=$("#app"
   const go=el("button",{class:"btn big",id:"go",text:t.go||t.n,disabled:true});
   const drop=el("div",{class:"drop"},el("label",{class:"btn",for:"fi",text:t.capture?"Tomar foto o elegir imágenes":"Elegir "+({pdf:t.multi?"archivos PDF":"archivo PDF",img:"imágenes",docx:"archivos Word",xlsx:"archivo Excel",html:"archivo HTML",pdfimg:"PDF o imagen",doc:"trabajo (Word o PDF)",any:"archivos",zip:"archivo ZIP"}[t.acc])}),el("small",{text:t.optional?"Opcional. También puedes arrastrarlo aquí.":"o arrástralos aquí"}),fi);
   const panel=el("div",{class:"panel"},drop,list,opts,el("div",{class:"act"},go),prog,msg);
-  app.append(el("section",{class:"view"},el("button",{class:"back",text:"← Todas las herramientas",onclick:()=>{history.pushState("","",location.pathname+location.search);route()}}),el("div",{class:"vhead"},icon(t.cat),el("h2",{text:t.n}),el("p",{text:t.d})),t.cat==="ai"&&IN_CLAUDE?el("p",{class:"note",text:"Esta herramienta envía el texto del documento a Claude para procesarlo. Las demás herramientas no envían nada."}):null,t.notice?el("p",{class:"note",text:t.notice}):null,panel,res));
+  app.append(el("section",{class:"view"},el("button",{class:"back",text:"← Todas las herramientas",onclick:()=>{if(START&&location.protocol.startsWith("http")){location.href="/";return}history.pushState("","",location.pathname+location.search);route()}}),el("div",{class:"vhead"},icon(t.cat),el("h2",{text:t.n}),el("p",{text:t.d})),t.cat==="ai"&&IN_CLAUDE?el("p",{class:"note",text:"Esta herramienta envía el texto del documento a Claude para procesarlo. Las demás herramientas no envían nada."}):null,t.notice?el("p",{class:"note",text:t.notice}):null,panel,res));
   const setMsg=(s,err)=>{msg.textContent=s||"";msg.className="msg"+(err?" err":"")};
   const progress=(s,f)=>{if(s==null){prog.hidden=true;return}prog.hidden=false;ptxt.textContent=s;if(f!=null)bar.style.width=Math.round(Math.min(1,Math.max(0,f))*100)+"%"};
   const v=id=>{const e=$("#o-"+id,panel);return e?e.value:""},chk=id=>{const e=$("#o-"+id,panel);return!!(e&&e.checked)};
@@ -496,9 +512,10 @@ function showResult(res,outs,notes,text,node,t){res.textContent="";const box=el(
   res.append(box);box.scrollIntoView({behavior:"smooth",block:"nearest"});
 }
 async function save(blob,name){if(IN_CLAUDE){try{const d=await claude.use("downloads");if(d){await d.save({filename:name,data:blob});return}}catch(e){if(e&&e.code==="declined")return}}const u=URL.createObjectURL(blob),a=el("a",{href:u,download:name});document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),60000)}
-function route(){const id=location.hash.slice(1),t=T.find(x=>x.id===id&&!x.soon);if(t)openTool(t);else home()}
+const START=window.CLICK_START||null;
+function route(){let id=location.hash.slice(1)||START||"";if(id==="pdf-word"||id==="pdf-a-word")id="ocr";const t=T.find(x=>x.id===id&&!x.soon);if(t)openTool(t);else home()}
 window.addEventListener("hashchange",route);
-$("#home").onclick=()=>{filter="all";query="";history.pushState("","",location.pathname+location.search);route()};
+$("#home").onclick=()=>{if(START&&location.protocol.startsWith("http")){location.href="/";return}filter="all";query="";history.pushState("","",location.pathname+location.search);route()};
 route();
 </script>
 
