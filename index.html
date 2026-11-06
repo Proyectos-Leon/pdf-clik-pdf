@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>PDF Clik PDF</title>
+<title>Clik PDF</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Herramientas PDF gratis y privadas: unir, dividir, comprimir, convertir, OCR, firmar, proteger y más. Todo se procesa en tu dispositivo.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -176,15 +176,15 @@ body{background-image:radial-gradient(color-mix(in srgb,var(--ink) 8%,transparen
 <body>
 <div class="wrap">
   <header class="top">
-    <button class="logo" id="home" aria-label="PDF Clik PDF, inicio">
+    <button class="logo" id="home" aria-label="Clik PDF, inicio">
       <span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3l5 15 2.5-6.5L19 9z"/><path d="M13 13l6 6"/></svg></span>
-      <span>PDF <b>Clik</b> PDF</span>
+      <span><b>Clik</b> PDF</span>
     </button>
     <span class="pill">🔒 Tus archivos no salen de tu dispositivo</span>
   </header>
   <main id="app"></main>
   <footer class="foot">
-    <span>PDF Clik PDF · Herramientas PDF gratis</span>
+    <span>Clik PDF · Herramientas PDF gratis</span>
     <span id="toolcount"></span>
   </footer>
 </div>
@@ -326,7 +326,7 @@ const T=[
 {id:"metadatos",cat:"edit",b:"INFO",n:"Editar propiedades",d:"Cambia título, autor y palabras clave del PDF.",acc:"pdf",extra:1,
  opts:'<label class="fld">Título<input id="o-title" type="text"></label><label class="fld">Autor<input id="o-author" type="text"></label><label class="fld">Asunto<input id="o-subject" type="text"></label><label class="fld">Palabras clave (separadas por coma)<input id="o-kw" type="text"></label>',
  onFiles:async(files,p)=>{const d=await libDoc(files[0]);$("#o-title",p).value=d.getTitle()||"";$("#o-author",p).value=d.getAuthor()||"";$("#o-subject",p).value=d.getSubject()||"";$("#o-kw",p).value=d.getKeywords()||""},
- run:async c=>{const d=await libDoc(c.files[0]);d.setTitle(c.v("title"));d.setAuthor(c.v("author"));d.setSubject(c.v("subject"));d.setKeywords(c.v("kw").split(",").map(s=>s.trim()).filter(Boolean));d.setProducer("PDF Clik PDF");c.out(await d.save(),c.files[0].name)}},
+ run:async c=>{const d=await libDoc(c.files[0]);d.setTitle(c.v("title"));d.setAuthor(c.v("author"));d.setSubject(c.v("subject"));d.setKeywords(c.v("kw").split(",").map(s=>s.trim()).filter(Boolean));d.setProducer("Clik PDF");c.out(await d.save(),c.files[0].name)}},
 {id:"editar",cat:"edit",b:"EDITAR",n:"Editar PDF",d:"Agrega texto, imágenes y dibujos encima del PDF.",soon:1},
 {id:"desbloquear",cat:"sec",b:"ABRIR",n:"Desbloquear PDF",d:"Quítale la contraseña a un PDF que puedes abrir.",acc:"pdf",
  opts:'<label class="fld">Contraseña actual (si te la pide para abrir)<input id="o-pw" type="password" autocomplete="off"></label><p class="hint">Las páginas quedan como imagen de alta calidad, sin contraseña.</p>',
@@ -353,7 +353,7 @@ const T=[
   let sw=0,ws=0;paras.forEach((p,i)=>{if(sc[i]!=null){sw+=sc[i]*wc(p);ws+=wc(p)}});if(!ws)throw new Error("Los párrafos son muy cortos para analizarlos. Prueba con un texto más largo.");const pct=Math.round(sw/ws),lvl=pct<30?"lo":pct<60?"mid":"hi";
   if(!reasons.length)reasons=heurReasons(paras.join("\n"));
   const box=el("div",{class:"panel"},el("div",{class:"det"},el("div",{class:"gauge "+lvl,style:"--p:"+pct,role:"img","aria-label":pct+"% parece IA"},el("span",{text:pct+"%"})),el("div",{class:"det-t"},el("h4",{text:{lo:"Parece escrito por una persona",mid:"Mezcla: algunas partes podrían ser de IA",hi:"Probablemente escrito con IA"}[lvl]}),el("p",{class:"hint",text:total+" palabras analizadas · "+how}),el("ul",{class:"summary"},reasons.map(r=>el("li",{text:r}))))),el("p",{class:"hint",text:"Párrafo por párrafo (rojo: muy probable IA · naranja: dudoso · verde: humano · gris: muy corto para evaluar)"}),el("div",{class:"paras"},paras.map((p,i)=>el("div",{class:"pp "+(sc[i]==null?"":sc[i]<30?"lo":sc[i]<60?"mid":"hi")},sc[i]==null?null:el("b",{text:sc[i]+"%"}),p))));
-  c.node(box);c.out(new Blob(["Detector de IA · PDF Clik PDF\n\nResultado general: "+pct+"% parece IA\n"+reasons.map(r=>"- "+r).join("\n")+"\n\nAviso: ningún detector es 100% confiable. Úsalo como orientación.\n\n"+paras.map((p,i)=>"["+(sc[i]==null?"—":sc[i]+"%")+"] "+p).join("\n\n")],{type:MIME.txt}),"informe-detector-ia.txt")}},
+  c.node(box);c.out(new Blob(["Detector de IA · Clik PDF\n\nResultado general: "+pct+"% parece IA\n"+reasons.map(r=>"- "+r).join("\n")+"\n\nAviso: ningún detector es 100% confiable. Úsalo como orientación.\n\n"+paras.map((p,i)=>"["+(sc[i]==null?"—":sc[i]+"%")+"] "+p).join("\n\n")],{type:MIME.txt}),"informe-detector-ia.txt")}},
 {id:"resumir",cat:"ai",b:"RESUMIR",n:"Resumir con IA",d:"Un resumen claro con los puntos clave de tu documento.",acc:"pdf",ai:1,
  opts:'<label class="fld">Tipo de resumen<select id="o-len"><option value="corto">Corto (un párrafo)</option><option value="puntos" selected>Puntos clave</option><option value="detallado">Detallado por secciones</option></select></label>',
  run:async c=>{const sm=await sampler(),t=(await pdfLines(c.files[0],c)).map(p=>p.map(l=>l.text).join("\n")).join("\n\n").trim();if(t.length<80)throw new Error("Este PDF casi no tiene texto (parece escaneado). Pásalo primero por OCR.");const how={corto:"un resumen de un solo párrafo",puntos:"un resumen en viñetas con los puntos clave (máximo 10)",detallado:"un resumen detallado organizado por secciones con subtítulos"}[c.v("len")],parts=chunks(t,24000);let notes=[];for(const[k,p]of parts.entries()){c.prog("Leyendo parte "+(k+1)+" de "+parts.length,k/parts.length);notes.push((await sm("Resume con precisión el siguiente fragmento de un documento, en español, conservando cifras, fechas y nombres importantes. Devuelve solo el resumen.\n\n"+p)).text)}c.prog("Escribiendo el resumen",.95);const r=(await sm("Con estas notas de un documento, escribe en español "+how+". Usa texto plano, sin markdown con asteriscos; para viñetas usa '• '. Devuelve solo el resumen.\n\n"+notes.join("\n\n"))).text.trim();c.text(r);c.out(await makeDocx(r.split(/\n+/).map(x=>({text:x}))),base(c.files[0].name)+"-resumen.docx");c.out(new Blob([r],{type:MIME.txt}),base(c.files[0].name)+"-resumen.txt")}},
@@ -367,7 +367,7 @@ let filter="all",query="";
 const ICO={org:'<rect x="4" y="7" width="12" height="14" rx="2"/><path d="M8 3h10a2 2 0 0 1 2 2v12"/>',opt:'<path d="M4 14h6v6M20 10h-6V4M14 10l7-7M3 21l7-7"/>',to:'<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M12 11v7M9 15l3 3 3-3"/>',from:'<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M12 18v-7M9 14l3-3 3 3"/>',edit:'<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>',sec:'<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',ai:'<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/>'};
 const icon=cat=>el("span",{class:"ico cat-"+cat,html:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+ICO[cat]+"</svg>"});
 function drawThumbs(box){box.textContent="";ST.order.forEach((o,k)=>{const cv=o.c;cv.style.transform="rotate("+o.rot+"deg)";const mv=(d)=>{const j=k+d;if(j<0||j>=ST.order.length)return;[ST.order[k],ST.order[j]]=[ST.order[j],ST.order[k]];drawThumbs(box)};box.append(el("div",{class:"th"},cv,el("small",{text:"Pág. "+(o.i+1)}),el("div",{class:"tb"},el("button",{type:"button","aria-label":"Mover antes",text:"←",onclick:()=>mv(-1)}),el("button",{type:"button","aria-label":"Girar",text:"⟳",onclick:()=>{o.rot=(o.rot+90)%360;cv.style.transform="rotate("+o.rot+"deg)"}}),el("button",{type:"button","aria-label":"Mover después",text:"→",onclick:()=>mv(1)}),el("button",{type:"button","aria-label":"Quitar página",text:"✕",onclick:()=>{ST.order.splice(k,1);drawThumbs(box)}}))))})}
-function home(){const app=$("#app");app.textContent="";document.title="PDF Clik PDF";
+function home(){const app=$("#app");app.textContent="";document.title="Clik PDF";
   const search=el("input",{type:"search",id:"q",placeholder:"Busca una herramienta: unir, comprimir, Word…","aria-label":"Buscar herramienta",value:query});
   const live=T.filter(t=>!t.soon&&!(t.ai&&!IN_CLAUDE)).length;
   const sheet=(cls,tag)=>el("div",{class:"sheet "+cls},el("span",{class:"tagf",text:tag}),el("i",{class:"t"}),el("i"),el("i",{class:"m"}),el("i"),el("i",{class:"s"}),el("i"),el("i",{class:"m"}));
@@ -380,7 +380,7 @@ function home(){const app=$("#app");app.textContent="";document.title="PDF Clik 
   app.append(el("section",{class:"sect"},el("h2",{text:"Así de fácil"}),el("div",{class:"how"},el("div",{},el("b",{text:"PASO 1"}),el("h4",{text:"Elige la herramienta"}),el("p",{text:"Busca lo que necesitas o explora por categoría."})),el("div",{},el("b",{text:"PASO 2"}),el("h4",{text:"Suelta tu archivo"}),el("p",{text:"Arrástralo o elígelo. Se queda en tu dispositivo."})),el("div",{},el("b",{text:"PASO 3"}),el("h4",{text:"Descarga el resultado"}),el("p",{text:"En segundos, listo para enviar o imprimir."})))));
   $("#toolcount").textContent=live+" herramientas listas";
 }
-function openTool(t){Object.keys(ST).forEach(k=>delete ST[k]);const app=$("#app");app.textContent="";document.title=t.n+" · PDF Clik PDF";window.scrollTo(0,0);let files=[];
+function openTool(t){Object.keys(ST).forEach(k=>delete ST[k]);const app=$("#app");app.textContent="";document.title=t.n+" · Clik PDF";window.scrollTo(0,0);let files=[];
   const fi=el("input",{type:"file",id:"fi",hidden:true,accept:ACC[t.acc],multiple:t.multi?true:null,capture:t.capture?"environment":null});
   const list=el("ul",{class:"files"}),opts=el("div",{class:"opts",html:t.opts||""}),msg=el("div",{class:"msg",role:"status"}),bar=el("i"),ptxt=el("span"),prog=el("div",{class:"prog",hidden:true},el("div",{class:"bar"},bar),ptxt),res=el("div");
   const go=el("button",{class:"btn big",id:"go",text:t.n,disabled:true});
@@ -407,7 +407,7 @@ function openTool(t){Object.keys(ST).forEach(k=>delete ST[k]);const app=$("#app"
   ready();
 }
 function showResult(res,outs,notes,text,node,t){res.textContent="";const box=el("div",{class:"panel res"},el("h3",{text:outs.length||text||node?"¡Listo!":"Terminado"}));if(notes.length)box.append(el("ul",{class:"summary"},notes.map(n=>el("li",{text:n}))));
-  if(outs.length){const ul=el("ul",{class:"outs"});outs.forEach(o=>ul.append(el("li",{},el("span",{class:"n",text:o.name}),el("span",{class:"s",text:fmt(o.b.size)}),el("button",{class:"btn",type:"button",text:"Descargar",onclick:()=>save(o.b,o.name)}))));box.append(ul);if(outs.length>1)box.append(el("div",{class:"act"},el("button",{class:"btn ghost",type:"button",text:"Descargar todo en ZIP",onclick:async e=>{e.target.disabled=true;try{await need("zip");const z=new JSZip(),seen={};outs.forEach(o=>{let n=o.name;if(seen[n])n=base(n)+"-"+(++seen[n])+"."+extOf(n);else seen[n]=1;z.file(n,o.b)});await save(await z.generateAsync({type:"blob"}),t.id+"-pdfclik.zip")}finally{e.target.disabled=false}}})))}
+  if(outs.length){const ul=el("ul",{class:"outs"});outs.forEach(o=>ul.append(el("li",{},el("span",{class:"n",text:o.name}),el("span",{class:"s",text:fmt(o.b.size)}),el("button",{class:"btn",type:"button",text:"Descargar",onclick:()=>save(o.b,o.name)}))));box.append(ul);if(outs.length>1)box.append(el("div",{class:"act"},el("button",{class:"btn ghost",type:"button",text:"Descargar todo en ZIP",onclick:async e=>{e.target.disabled=true;try{await need("zip");const z=new JSZip(),seen={};outs.forEach(o=>{let n=o.name;if(seen[n])n=base(n)+"-"+(++seen[n])+"."+extOf(n);else seen[n]=1;z.file(n,o.b)});await save(await z.generateAsync({type:"blob"}),t.id+"-clikpdf.zip")}finally{e.target.disabled=false}}})))}
   if(text!=null){const ta=el("textarea",{class:"textout",readonly:true,"aria-label":"Resultado"});ta.value=text;box.append(ta,el("div",{class:"act"},el("button",{class:"btn ghost",type:"button",text:"Copiar texto",onclick:async e=>{try{await navigator.clipboard.writeText(text);e.target.textContent="Copiado ✓"}catch(err){ta.select();e.target.textContent="Selecciónalo y cópialo"}}})))}
   if(node)box.append(node);
   res.append(box);box.scrollIntoView({behavior:"smooth",block:"nearest"});
