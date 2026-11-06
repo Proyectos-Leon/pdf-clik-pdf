@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://click-documentos.netlify.app/sitemap.xml
+Sitemap: https://de-pdf-a-word.netlify.app/sitemap.xml
