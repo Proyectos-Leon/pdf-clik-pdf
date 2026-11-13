@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://de-pdf-a-word.netlify.app/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://de-pdf-a-word.netlify.app/de-pdf-a-word</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://de-pdf-a-word.netlify.app/unir-pdf</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://de-pdf-a-word.netlify.app/comprimir-pdf</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://de-pdf-a-word.netlify.app/de-jpg-a-pdf</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://de-pdf-a-word.netlify.app/de-word-a-pdf</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://de-pdf-a-word.netlify.app/detector-de-ia</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://de-pdf-a-word.netlify.app/editar-texto-imagen</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://de-pdf-a-word.web.app/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://de-pdf-a-word.web.app/de-pdf-a-word</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://de-pdf-a-word.web.app/unir-pdf</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://de-pdf-a-word.web.app/comprimir-pdf</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://de-pdf-a-word.web.app/de-jpg-a-pdf</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://de-pdf-a-word.web.app/de-word-a-pdf</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://de-pdf-a-word.web.app/detector-de-ia</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://de-pdf-a-word.web.app/editar-texto-imagen</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
 </urlset>

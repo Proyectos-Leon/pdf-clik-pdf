@@ -203,8 +203,8 @@ body{background:radial-gradient(900px 620px at 8% -8%,color-mix(in srgb,var(--ac
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 
-<link rel="canonical" href="https://de-pdf-a-word.netlify.app/">
-<meta property="og:url" content="https://de-pdf-a-word.netlify.app/">
+<link rel="canonical" href="https://de-pdf-a-word.web.app/">
+<meta property="og:url" content="https://de-pdf-a-word.web.app/">
 </head>
 <body>
 <div class="wrap">
@@ -534,7 +534,7 @@ const T=[
 {id:"editar-imagen",cat:"edit",b:"TEXTO",n:"Editar texto de una imagen",d:"Sube una foto o captura, toca cualquier texto y cámbialo encima de la imagen, sin Photoshop.",acc:"img",go:"Guardar imagen editada",
  opts:'<label class="fld">Idioma del texto<select id="o-lang"><option value="spa">Español</option><option value="eng">Inglés</option><option value="spa+eng">Español e inglés</option></select></label><div id="o-ed" class="opts"><p class="hint">Sube una imagen y aquí aparecerá para que toques el texto que quieras cambiar.</p></div>',
  onFiles:async(files,p,c)=>{const box=$("#o-ed",p);box.textContent="";ST.lines=null;const cv=await imgCanvas(files[0],"",2400);ST.cv=cv;
-  try{await need("tess")}catch(e){throw new Error(IN_CLAUDE?"Esta herramienta funciona en la página pública: clickdocumentos.netlify.app":e.message)}
+  try{await need("tess")}catch(e){throw new Error(IN_CLAUDE?"Esta herramienta funciona en la página pública: de-pdf-a-word.web.app":e.message)}
   c.prog("Buscando el texto en la imagen… (la primera vez tarda un poco más)",.2);let data;const w=await Tesseract.createWorker(c.v("lang")||"spa");try{data=(await w.recognize(cv,{},{blocks:true})).data}finally{await w.terminate();c.prog(null)}
   ST.lines=[];(data.blocks||[]).forEach(b=>(b.paragraphs||[]).forEach(pp=>(pp.lines||[]).forEach(l=>{const t=l.text.trim();if(t&&l.confidence>30&&l.bbox.y1-l.bbox.y0>5)ST.lines.push({t,b:l.bbox})})));
   if(!ST.lines.length){box.append(el("p",{class:"note",text:"No encontré texto en esta imagen. Prueba con una foto más nítida."}));return}
